@@ -68,7 +68,13 @@ dev_dependencies:
   flutter_lints: ^5.0.0
   retrofit_generator: ^7.0.8
   build_runner: ^2.4.6
+  flutter_gen_runner:
   flutter_launcher_icons: "^0.13.1"
+
+# pubspec.yaml
+flutter_gen:
+  integrations:
+    flutter_svg: true
 
 flutter_launcher_icons:
   android: "ic_launcher"

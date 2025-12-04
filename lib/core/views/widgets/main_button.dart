@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'loader_widget.dart';
 
 class MainButton extends StatelessWidget {
-  final String title;
+  final String? title;
+  final Widget? child;
   final VoidCallback? onPressed;
   final bool isLoading;
   final ButtonType buttonType;
@@ -17,8 +18,7 @@ class MainButton extends StatelessWidget {
   final OutlinedBorder? shape;
 
   const MainButton(
-      {super.key,
-      required this.title,
+      {super.key, this.title,
       required this.onPressed,
       this.isLoading = false,
       this.buttonType = ButtonType.elevated,
@@ -28,7 +28,7 @@ class MainButton extends StatelessWidget {
       this.padding,
       this.shape,
       this.backgroundColor,
-      this.elevation});
+      this.elevation, this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -51,13 +51,13 @@ class MainButton extends StatelessWidget {
                 ? const LoaderWidget(
                     color: Colors.white,
                   )
-                : Row(
+                : child??Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      if (title.isNotEmpty)
+                      if (title?.isNotEmpty??false)
                         Text(
-                          title,
+                          title??'',
                         ),
                      if(icon!=null) const SizedBox(
                         width: 4,
@@ -86,13 +86,13 @@ class MainButton extends StatelessWidget {
                 ?  LoaderWidget(
                       color: borderColor,
                   )
-                : Row(
+                : child??Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      if (title.isNotEmpty)
+                      if (title?.isNotEmpty??false)
                         Text(
-                          title,
+                          title??'',
                         ),
                       if(icon!=null)const SizedBox(
                         width: 4,

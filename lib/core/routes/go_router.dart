@@ -1,9 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:workiom/features/auth/views/pages/signup_page.dart';
-
-import '../../features/auth/views/pages/signin_page.dart';
+import '../../features/auth/views/pages/signup_page.dart';
 import '../../features/auth/views/pages/splash_page.dart';
 
 /// The route configuration.
@@ -17,13 +15,6 @@ final GoRouter goRouter = GoRouter(
       path: NamedRoutes.base,
       builder: (BuildContext context, GoRouterState state) {
         return const SplashPage();
-      },
-    ),
-    GoRoute(
-      parentNavigatorKey: _parentKey,
-      path: NamedRoutes.signin,
-      builder: (BuildContext context, GoRouterState state) {
-        return const SigninPage();
       },
     ),
     GoRoute(
@@ -78,7 +69,6 @@ final GoRouter goRouter = GoRouter(
 
 class NamedRoutes {
   static const String base = '/';
-  static const String signin = '/signin';
   static const String signup = '/signup';
   static const String home = '/home';
 }

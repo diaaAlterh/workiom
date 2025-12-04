@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,6 +14,10 @@ class AuthCubit extends Cubit<BaseState<AuthModel>> {
   final AuthRepository _authRepository;
 
   AuthCubit(this._authRepository) : super(const BaseState.initial());
+
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  TextEditingController controllerEmail=TextEditingController();
+  TextEditingController controllerPassword=TextEditingController();
 
   User? user;
 

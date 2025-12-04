@@ -1,0 +1,19 @@
+{
+  "msg_not_internet": "No Internet Connection!",
+  "retry": "Retry",
+  "login_title": "Enter a strong password",
+  "login_subtitle": "Let's start an amazing journey! \uD83D\uDC4B\uD83C\uDFFB",
+  "your_work_email": "Your work email",
+  "your_password": "Your password",
+  "confirm_password": "Confirm Password",
+  "email": "Email",
+  "password": "Password",
+  "clear": "Clear",
+  "show_password": "Show Password",
+  "hide_password": "Hide Password",
+  "password_validation_error": "Not strong enough",
+  "password_validation_success": "Strong Password",
+  "password_validation_error_1": "Passwords must have at least 7 characters",
+  "password_validation_error_2": "Passwords must have at least one uppercase ('A'-'Z').",
+  "stay_organized_with": "Stay organized with"
+}

@@ -9,44 +9,49 @@ ThemeData buildLightTheme(BuildContext context) {
     platform: TargetPlatform.iOS,
     textTheme: textTheme,
     primaryColor: lightColorScheme.primary,
-    scaffoldBackgroundColor: const Color(0xFFF7F7F7),
+    scaffoldBackgroundColor: Colors.white,
     inputDecorationTheme: InputDecorationTheme(
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
-        border: OutlineInputBorder(
-            borderSide: BorderSide(color: lightColorScheme.outline),
-            borderRadius: BorderRadius.circular(24))),
+      contentPadding: EdgeInsets.symmetric(vertical: 16),
+    ),
     dividerColor: lightColorScheme.outline,
     appBarTheme: AppBarTheme(
-        backgroundColor: lightColorScheme.primary,
-        iconTheme: const IconThemeData(color: Colors.white)),
+      backgroundColor: Colors.transparent,
+      iconTheme: IconThemeData(color: lightColorScheme.primary),
+    ),
     tabBarTheme: TabBarThemeData(
       indicatorColor: lightColorScheme.secondary,
       dividerColor: Colors.transparent,
       unselectedLabelStyle: textTheme.headlineSmall?.copyWith(
-          color: Colors.white.withOpacity(.7), fontWeight: FontWeight.w600),
+        color: Colors.white.withOpacity(.7),
+        fontWeight: FontWeight.w600,
+      ),
       labelStyle: textTheme.headlineSmall?.copyWith(
         color: Colors.white,
         fontWeight: FontWeight.w600,
       ),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(24)))),
+      style: ElevatedButton.styleFrom(
+        textStyle: textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600),
+        elevation: 0,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      ),
+    ),
     outlinedButtonTheme: OutlinedButtonThemeData(
-        style: OutlinedButton.styleFrom(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(24)))),
+      style: OutlinedButton.styleFrom(
+        textStyle: textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      ),
+    ),
     bottomSheetTheme: const BottomSheetThemeData(
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(16))),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
     ),
     cardTheme: CardThemeData(
       color: Colors.white,
       surfaceTintColor: Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
     ),
     colorScheme: lightColorScheme.copyWith(surface: lightColorScheme.surface),
   );

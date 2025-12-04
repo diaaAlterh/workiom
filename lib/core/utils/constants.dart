@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class Constants {
   static const String appName = 'Workiom';
 
-  static const String baseUrl = 'https://api.sijilicare.com';
+  static const String baseUrl = 'https://api.workiom.club/api/services/app';
 
   static const String tokenKey = 'token';
   static const String refreshTokenKey = 'refresh_token';
@@ -17,3 +17,4 @@ class Constants {
   static const Duration prodReceiveTimeout = Duration(seconds: 60);
   static const Duration prodSendTimeout = Duration(seconds: 60);
 }
+enum Language{en,ar,tr}
