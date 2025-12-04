@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:workiom/core/app_cubit/base_state.dart';
-import 'package:workiom/features/auth/models/auth_model.dart';
+import 'package:workiom/features/auth/cubits/login_information_cubit.dart';
 import 'package:workiom/gen/assets.gen.dart';
 
 import '../../../../core/di/injection_container.dart';
@@ -11,6 +11,7 @@ import '../../../../core/routes/go_router.dart';
 
 import '../../../../core/views/widgets/main_button.dart';
 import '../../cubits/auth_cubit.dart';
+import '../../models/login_information_model.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -20,7 +21,8 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  final AuthCubit authCubit = getIt<AuthCubit>();
+  final loginInformationCubit = getIt<LoginInformationCubit>();
+  final authCubit = getIt<AuthCubit>();
 
   @override
   void initState() {
@@ -31,7 +33,7 @@ class _SplashPageState extends State<SplashPage> {
   splashLogic() {
     final token = authCubit.getToken();
     if (token != null) {
-      authCubit.profile();
+      loginInformationCubit.getCurrentLoginInformation();
     } else {
       Future.delayed(const Duration(seconds: 2), () {
         context.go(NamedRoutes.signup);
@@ -41,12 +43,13 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AuthCubit, BaseState<AuthModel>>(
-      bloc: authCubit,
+    return BlocListener<LoginInformationCubit, BaseState<LoginInformationModel>>(
+      bloc: loginInformationCubit,
       listener: (context, state) => state.maybeWhen(
         orElse: () {},
         loaded: (data) {
-          if (data?.user?.id == null) {
+          data as LoginInformationModel;
+          if (data.result?.user == null) {
             context.go(NamedRoutes.signup);
           } else {
             context.go(NamedRoutes.home);
@@ -61,7 +64,7 @@ class _SplashPageState extends State<SplashPage> {
             enableDrag: false,
             builder: (context) => PopScope(
               onPopInvokedWithResult: (value, s) {
-                authCubit.profile();
+                loginInformationCubit.getCurrentLoginInformation();
               },
               child: SizedBox(
                 height: 120,
