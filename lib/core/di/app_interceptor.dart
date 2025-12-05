@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import '../../features/auth/cubits/auth_cubit.dart';
 import '../routes/go_router.dart';
+import '../routes/named_routes.dart';
 import 'injection_container.dart';
 
 class AppInterceptor extends QueuedInterceptor {

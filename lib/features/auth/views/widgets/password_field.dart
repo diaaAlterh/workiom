@@ -2,9 +2,14 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:workiom/core/app_cubit/base_state.dart';
+import 'package:workiom/features/auth/views/widgets/password_validation_widget.dart';
 
+import '../../../../core/di/injection_container.dart';
 import '../../../../core/utils/validators.dart';
 import '../../../../gen/assets.gen.dart';
+import '../../cubits/password_complexity_cubit.dart';
 
 class PasswordField extends StatefulWidget {
   final TextEditingController controller;
@@ -17,6 +22,7 @@ class PasswordField extends StatefulWidget {
 
 class _PasswordFieldState extends State<PasswordField> {
   bool isPasswordVisible = false;
+  final passwordComplexityCubit = getIt<PasswordComplexityCubit>();
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +45,7 @@ class _PasswordFieldState extends State<PasswordField> {
               child: TextFormField(
                 style: Theme.of(context).textTheme.titleLarge,
                 keyboardType: TextInputType.visiblePassword,
-                validator: Validators.validateEmail,
+                onChanged: passwordComplexityCubit.validate,
                 textInputAction: TextInputAction.done,
                 obscureText: !isPasswordVisible,
                 controller: widget.controller,
@@ -79,6 +85,16 @@ class _PasswordFieldState extends State<PasswordField> {
               ),
             ),
           ],
+        ),
+        SizedBox(height: 16),
+        BlocBuilder<PasswordComplexityCubit, BaseState>(
+          bloc: passwordComplexityCubit,
+          builder: (context, state) => state.maybeWhen(
+            orElse: () => SizedBox(),
+            loaded: (data) => PasswordValidationWidget(
+              rules: data as List<PasswordRuleResult>,
+            ),
+          ),
         ),
       ],
     );

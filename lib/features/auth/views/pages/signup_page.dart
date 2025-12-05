@@ -1,27 +1,34 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:workiom/core/app_cubit/base_state.dart';
 import 'package:workiom/core/di/injection_container.dart';
-import 'package:workiom/core/views/widgets/hide_child_when_keyboard_opened.dart';
-import 'package:workiom/core/views/widgets/main_button.dart';
+import 'package:workiom/core/routes/named_routes.dart';
 import 'package:workiom/features/auth/cubits/auth_cubit.dart';
+import 'package:workiom/features/auth/cubits/password_complexity_cubit.dart';
 import 'package:workiom/features/auth/views/widgets/email_field.dart';
+import 'package:workiom/features/auth/views/widgets/enter_button.dart';
 import 'package:workiom/features/auth/views/widgets/password_field.dart';
-import 'package:workiom/features/auth/views/widgets/password_validation_widget.dart';
-import 'package:workiom/gen/assets.gen.dart';
+import 'package:workiom/features/auth/views/widgets/stay_organized_with_workiom_widget.dart';
 
 class SignupPage extends StatelessWidget {
   const SignupPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    GlobalKey<FormState> formKey = GlobalKey<FormState>();
     final authCubit = getIt<AuthCubit>();
+    final passwordComplexityCubit = getIt<PasswordComplexityCubit>();
+
     return Scaffold(
       appBar: AppBar(),
       body: Form(
-        key: authCubit.formKey,
+        key: formKey,
         child: ListView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-          padding: EdgeInsets.symmetric(horizontal: 16),
+          padding: EdgeInsets.all(16),
           children: [
             Text(
               'login_title'.tr(),
@@ -34,49 +41,35 @@ class SignupPage extends StatelessWidget {
                 color: Theme.of(context).colorScheme.tertiary,
               ),
             ),
-            SizedBox(height: 100),
+            SizedBox(height: 64),
             EmailField(controller: authCubit.controllerEmail),
             SizedBox(height: 16),
             PasswordField(controller: authCubit.controllerPassword),
-            SizedBox(height: 16),
-            PasswordValidationWidget(),
             SizedBox(height: 24),
-            MainButton(
-              onPressed: () {},
-              child: Row(
-                children: [
-                  Spacer(),
-                  Text("confirm_password".tr()),
-                  Spacer(),
-                  Assets.images.iconEnter.svg(),
-                ],
-              ),
+            BlocBuilder<PasswordComplexityCubit, BaseState>(
+              bloc: passwordComplexityCubit,
+              builder: (context, state) {
+                bool isPasswordValid = passwordComplexityCubit.rules.every(
+                  (e) => e.isValid,
+                );
+                return EnterButton(
+                  title: 'confirm_password'.tr(),
+                  onPressed: isPasswordValid&&passwordComplexityCubit.rules.isNotEmpty
+                      ? () {
+                          if (formKey.currentState?.validate() ?? false) {
+                            context.push(NamedRoutes.createWorkspace);
+                          } else {
+                            HapticFeedback.vibrate();
+                          }
+                        }
+                      : null,
+                );
+              },
             ),
           ],
         ),
       ),
-      bottomSheet: HideChildWhenKeyboardOpened(
-        child: Container(
-          color: Colors.white,
-          padding: EdgeInsets.only(top: 16, bottom: 48),
-          child: Hero(
-            tag: 'stay_organized_with',
-            child: Row(
-              spacing: 8,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'stay_organized_with'.tr(),
-                  style: Theme.of(
-                    context,
-                  ).textTheme.titleLarge?.copyWith(color: Color(0xFF555555)),
-                ),
-                Assets.images.logoWithTitle.svg(),
-              ],
-            ),
-          ),
-        ),
-      ),
+      bottomSheet: StayOrganizedWithWorkiomWidget(),
     );
   }
 }

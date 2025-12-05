@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class Constants {
   static const String appName = 'Workiom';
 
-  static const String baseUrl = 'https://api.workiom.club/api/services/app';
+  static const String baseUrl = 'https://api.workiom.club/api/';
 
   static const String tokenKey = 'token';
   static const String refreshTokenKey = 'refresh_token';

@@ -16,9 +16,12 @@ class AuthCubit extends Cubit<AuthState> {
 
   AuthCubit(this._authRepository) : super(const AuthState.initial());
 
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  GlobalKey<FormState> formKeyCreateWorkspace = GlobalKey<FormState>();
   TextEditingController controllerEmail = TextEditingController();
   TextEditingController controllerPassword = TextEditingController();
+  TextEditingController controllerWorkspace = TextEditingController();
+  TextEditingController controllerFirstName = TextEditingController();
+  TextEditingController controllerLastName = TextEditingController();
 
   Future<void> authenticate() async {
     emit(const AuthState.loading());

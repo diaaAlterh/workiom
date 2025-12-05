@@ -50,9 +50,16 @@ class $AssetsImagesGen {
   SvgGenImage get iconPassword =>
       const SvgGenImage('assets/images/icon_password.svg');
 
+  /// File path: assets/images/icon_text.svg
+  SvgGenImage get iconText => const SvgGenImage('assets/images/icon_text.svg');
+
   /// File path: assets/images/icon_warning.svg
   SvgGenImage get iconWarning =>
       const SvgGenImage('assets/images/icon_warning.svg');
+
+  /// File path: assets/images/icon_workspace.svg
+  SvgGenImage get iconWorkspace =>
+      const SvgGenImage('assets/images/icon_workspace.svg');
 
   /// File path: assets/images/logo.svg
   SvgGenImage get logo => const SvgGenImage('assets/images/logo.svg');
@@ -72,7 +79,9 @@ class $AssetsImagesGen {
         iconError,
         iconLanguge,
         iconPassword,
+        iconText,
         iconWarning,
+        iconWorkspace,
         logo,
         logoWithTitle
       ];
