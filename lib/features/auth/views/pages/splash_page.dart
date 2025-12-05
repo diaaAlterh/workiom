@@ -7,7 +7,6 @@ import 'package:workiom/features/auth/cubits/login_information_cubit.dart';
 import 'package:workiom/gen/assets.gen.dart';
 
 import '../../../../core/di/injection_container.dart';
-import '../../../../core/routes/go_router.dart';
 
 import '../../../../core/routes/named_routes.dart';
 import '../../../../core/views/widgets/main_button.dart';

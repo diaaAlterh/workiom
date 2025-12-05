@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'color_light_scheme.dart';
 import 'text_theme.dart';
@@ -16,6 +17,11 @@ ThemeData buildLightTheme(BuildContext context) {
     dividerColor: lightColorScheme.outline,
     appBarTheme: AppBarTheme(
       backgroundColor: Colors.transparent,
+      systemOverlayStyle: const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.light,
+      ),
       iconTheme: IconThemeData(color: lightColorScheme.primary),
     ),
     tabBarTheme: TabBarThemeData(

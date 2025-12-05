@@ -30,7 +30,6 @@ class PasswordComplexityCubit
       },
       (data) {
         passwordSettings = data.result?.setting;
-        validate('s');
       },
     );
   }

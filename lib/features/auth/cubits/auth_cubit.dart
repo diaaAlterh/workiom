@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:workiom/features/auth/cubits/auth_state.dart';
+import 'package:workiom/features/auth/cubits/editions_cubit.dart';
 import 'package:workiom/features/auth/models/requests/authenticate_request.dart';
 import 'package:workiom/features/auth/models/requests/register_tenant_request.dart';
 import '../../../../core/di/injection_container.dart';
@@ -13,6 +15,7 @@ import '../repository/auth_repository.dart';
 @lazySingleton
 class AuthCubit extends Cubit<AuthState> {
   final AuthRepository _authRepository;
+
   AuthCubit(this._authRepository) : super(const AuthState.initial());
 
   TextEditingController controllerEmail = TextEditingController();
@@ -21,10 +24,19 @@ class AuthCubit extends Cubit<AuthState> {
   TextEditingController controllerFirstName = TextEditingController();
   TextEditingController controllerLastName = TextEditingController();
 
+  final editionsCubit = getIt<EditionsCubit>();
+
   Future<void> authenticate() async {
     emit(const AuthState.loading());
     final result = await _authRepository.authenticate(
-      request: AuthenticateRequest(),
+      request: AuthenticateRequest(
+        userNameOrEmailAddress: controllerEmail.text,
+        password: controllerPassword.text,
+        tenantName: controllerWorkspace.text,
+        rememberClient: false,
+        singleSignIn: false,
+        ianaTimeZone: (await FlutterTimezone.getLocalTimezone()).identifier,
+      ),
     );
 
     result.fold(
@@ -41,7 +53,15 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> registerTenant() async {
     emit(const AuthState.loading());
     final result = await _authRepository.registerTenant(
-      request: RegisterTenantRequest(),
+      request: RegisterTenantRequest(
+        adminEmailAddress: controllerEmail.text,
+        adminFirstName: controllerFirstName.text,
+        adminLastName: controllerLastName.text,
+        adminPassword: controllerPassword.text,
+        name: controllerWorkspace.text,
+        tenancyName: controllerWorkspace.text,
+        editionId: editionsCubit.editions.firstOrNull?.edition?.id.toString(),
+      ),
     );
     result.fold(
       (l) {
@@ -64,5 +84,11 @@ class AuthCubit extends Cubit<AuthState> {
       Constants.refreshTokenKey,
     );
     return token;
+  }
+
+  logout() async {
+    await getIt<SharedPreferences>().clear();
+
+    emit(const AuthState.initial());
   }
 }

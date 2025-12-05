@@ -13,9 +13,9 @@ class TermsAndPrivacyText extends StatelessWidget {
       child: RichText(
         textAlign: TextAlign.center,
         text: TextSpan(
-          style: Theme.of(
-            context,
-          ).textTheme.titleMedium?.copyWith(color: Color(0xFF555555)),
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+            color: Theme.of(context).colorScheme.tertiary,
+          ),
           children: [
             TextSpan(text: '${"by_signing".tr()} '),
             TextSpan(
@@ -30,9 +30,10 @@ class TermsAndPrivacyText extends StatelessWidget {
             TextSpan(
               text: "privacy".tr(),
               style: const TextStyle(decoration: TextDecoration.underline),
-              recognizer: TapGestureRecognizer()..onTap = () {
-                launchUrl(Uri.parse('https://workiom.com/privacy-policy'));
-              },
+              recognizer: TapGestureRecognizer()
+                ..onTap = () {
+                  launchUrl(Uri.parse('https://workiom.com/privacy-policy'));
+                },
             ),
           ],
         ),

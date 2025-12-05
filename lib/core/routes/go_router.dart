@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:workiom/features/auth/views/pages/auth_page.dart';
 import 'package:workiom/features/auth/views/pages/create_workspace_page.dart';
+import 'package:workiom/features/auth/views/pages/thank_you_page.dart';
 import '../../features/auth/views/pages/signup_page.dart';
 import '../../features/auth/views/pages/splash_page.dart';
 import 'named_routes.dart';
@@ -38,6 +39,13 @@ final GoRouter goRouter = GoRouter(
       path: NamedRoutes.createWorkspace,
       builder: (BuildContext context, GoRouterState state) {
         return const CreateWorkspacePage();
+      },
+    ),
+    GoRoute(
+      parentNavigatorKey: _parentKey,
+      path: NamedRoutes.thankYou,
+      builder: (BuildContext context, GoRouterState state) {
+        return const ThankYouPage();
       },
     ),
   ],

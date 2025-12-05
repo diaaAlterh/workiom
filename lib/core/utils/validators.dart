@@ -1,4 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:workiom/core/di/injection_container.dart';
+import 'package:workiom/features/auth/cubits/tenant_available_cubit.dart';
+import 'package:workiom/features/auth/models/tenant_available_model.dart';
 
 import '../../features/auth/models/password_complexity_model.dart';
 
@@ -28,6 +31,10 @@ class Validators {
 
     if (!nameRegex.hasMatch(name)) {
       return "workspace_error".tr();
+    }
+
+    if (getIt<TenantAvailableCubit>().tenantId != null) {
+      return 'workspace_name_is_taken'.tr();
     }
 
     return null; // Valid tenant name
@@ -65,9 +72,7 @@ extension PasswordValidator on Setting {
     if (requiredLength != null && requiredLength! > 0) {
       results.add(
         PasswordRuleResult(
-          "password_min_length".tr(
-            namedArgs: {'length': '$requiredLength'},
-          ),
+          "password_min_length".tr(namedArgs: {'length': '$requiredLength'}),
           password.length >= requiredLength!,
         ),
       );

@@ -14,7 +14,7 @@ class StayOrganizedWithWorkiomWidget extends StatelessWidget {
     return HideChildWhenKeyboardOpened(
       child: Container(
         color: Colors.white,
-        padding: EdgeInsets.only(top: 16, bottom: 48),
+        padding: EdgeInsets.only(top: 0, bottom: 64),
         child: Hero(
           tag: 'stay_organized_with',
           child: Row(
@@ -25,7 +25,7 @@ class StayOrganizedWithWorkiomWidget extends StatelessWidget {
                 'stay_organized_with'.tr(),
                 style: Theme.of(
                   context,
-                ).textTheme.titleLarge?.copyWith(color: Color(0xFF555555)),
+                ).textTheme.titleLarge?.copyWith(color: Theme.of(context).colorScheme.tertiary),
               ),
               CupertinoButton(
                 padding: EdgeInsets.zero,

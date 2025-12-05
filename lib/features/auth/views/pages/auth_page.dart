@@ -40,7 +40,7 @@ class AuthPage extends StatelessWidget {
           MainButton(
             title: 'continue_with_google'.tr(),
             onPressed: () {},
-            backgroundColor: Color(0xFFF4F4F4),
+            backgroundColor: Theme.of(context).colorScheme.surface,
             icon: Assets.images.google.svg(),
             color: Colors.black,
           ),
@@ -49,7 +49,7 @@ class AuthPage extends StatelessWidget {
               padding: EdgeInsets.all(32),
               child: Text(
                 'or'.tr(),
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Color(0xFF555555)),
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).colorScheme.tertiary),
               ),
             ),
           ),
@@ -59,7 +59,8 @@ class AuthPage extends StatelessWidget {
               context.push(NamedRoutes.signup);
             },
           ),
-          TermsAndPrivacyText()
+          TermsAndPrivacyText(),
+          SizedBox(height: 100,)
         ],
       ),
       bottomSheet: StayOrganizedWithWorkiomWidget(),

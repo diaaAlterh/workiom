@@ -44,5 +44,7 @@
   "privacy": "Privacy Policy",
   "ar": "العربية",
   "tr": "Türkçe",
-  "en": "English"
+  "en": "English",
+  "workspace_name_is_taken": "Workspace name is taken",
+  "logout": "Logout"
 }

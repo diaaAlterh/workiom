@@ -9,7 +9,11 @@ import '../repository/auth_repository.dart';
 class EditionsCubit extends Cubit<BaseState<EditionsModel>> {
   final AuthRepository _authRepository;
 
-  EditionsCubit(this._authRepository) : super(const BaseState.initial());
+  EditionsCubit(this._authRepository) : super(const BaseState.initial()) {
+    getEditions();
+  }
+
+  List<EditionsWithFeatures> editions = [];
 
   Future<void> getEditions() async {
     emit(const BaseState.loading());
@@ -20,8 +24,9 @@ class EditionsCubit extends Cubit<BaseState<EditionsModel>> {
         showToast(message: l.statusMessage);
         emit(BaseState.error(l));
       },
-      (result) {
-        emit(BaseState.loaded(result));
+      (data) {
+        editions = data.result?.editionsWithFeatures ?? [];
+        emit(BaseState.loaded(data));
       },
     );
   }

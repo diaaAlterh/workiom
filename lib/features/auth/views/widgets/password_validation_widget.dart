@@ -24,7 +24,7 @@ class PasswordValidationWidget extends StatelessWidget {
               height: 8,
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
-                color: Color(0xFFF4F4F4),
+                color: Theme.of(context).colorScheme.surface,
                 borderRadius: BorderRadius.circular(4),
               ),
             ),
@@ -90,7 +90,7 @@ class PasswordValidationWidget extends StatelessWidget {
                     Text(
                       e.rule,
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: Color(0xFF555555),
+                        color: Theme.of(context).colorScheme.tertiary,
                       ),
                     ),
                   ],

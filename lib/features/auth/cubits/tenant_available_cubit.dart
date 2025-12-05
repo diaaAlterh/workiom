@@ -20,10 +20,12 @@ class TenantAvailableCubit extends Cubit<BaseState<TenantAvailableModel>> {
 
   TenantAvailableCubit(this._authRepository) : super(const BaseState.initial());
 
-  Future<void> isTenantAvailable() async {
+  int? tenantId;
+
+  Future<void> isTenantAvailable({required String tenancyName}) async {
     emit(const BaseState.loading());
     final result = await _authRepository.isTenantAvailable(
-      request: IsTenantAvailableRequest(),
+      request: IsTenantAvailableRequest(tenancyName: tenancyName),
     );
 
     result.fold(
@@ -32,6 +34,7 @@ class TenantAvailableCubit extends Cubit<BaseState<TenantAvailableModel>> {
         emit(BaseState.error(l));
       },
       (result) {
+        tenantId=result.result?.tenantId;
         emit(BaseState.loaded(result));
       },
     );

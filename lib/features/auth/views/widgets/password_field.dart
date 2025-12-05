@@ -68,11 +68,11 @@ class _PasswordFieldState extends State<PasswordField> {
                       icon: AnimatedCrossFade(
                         firstChild: Icon(
                           CupertinoIcons.eye,
-                          color: Color(0xFF747474),
+                          color: Theme.of(context).colorScheme.onTertiary,
                         ),
                         secondChild: Icon(
                           CupertinoIcons.eye_slash,
-                          color: Color(0xFF747474),
+                          color: Theme.of(context).colorScheme.onTertiary,
                         ),
                         crossFadeState: !isPasswordVisible
                             ? CrossFadeState.showFirst
