@@ -49,10 +49,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i51.AuthRepository(gh<_i742.AuthServices>()));
     gh.lazySingleton<_i71.AuthCubit>(
         () => _i71.AuthCubit(gh<_i51.AuthRepository>()));
-    gh.lazySingleton<_i356.LoginInformationCubit>(
-        () => _i356.LoginInformationCubit(gh<_i51.AuthRepository>()));
     gh.lazySingleton<_i362.EditionsCubit>(
         () => _i362.EditionsCubit(gh<_i51.AuthRepository>()));
+    gh.lazySingleton<_i356.LoginInformationCubit>(
+        () => _i356.LoginInformationCubit(gh<_i51.AuthRepository>()));
     gh.lazySingleton<_i219.PasswordComplexityCubit>(
         () => _i219.PasswordComplexityCubit(gh<_i51.AuthRepository>()));
     gh.lazySingleton<_i146.TenantAvailableCubit>(

@@ -19,6 +19,12 @@ class $AssetsImagesGen {
   AssetGenImage get appLogo =>
       const AssetGenImage('assets/images/app_logo.png');
 
+  /// File path: assets/images/ar.svg
+  SvgGenImage get ar => const SvgGenImage('assets/images/ar.svg');
+
+  /// File path: assets/images/en.svg
+  SvgGenImage get en => const SvgGenImage('assets/images/en.svg');
+
   /// File path: assets/images/google.svg
   SvgGenImage get google => const SvgGenImage('assets/images/google.svg');
 
@@ -68,9 +74,14 @@ class $AssetsImagesGen {
   SvgGenImage get logoWithTitle =>
       const SvgGenImage('assets/images/logo_with_title.svg');
 
+  /// File path: assets/images/tr.svg
+  SvgGenImage get tr => const SvgGenImage('assets/images/tr.svg');
+
   /// List of all assets
   List<dynamic> get values => [
         appLogo,
+        ar,
+        en,
         google,
         iconCheck,
         iconClear,
@@ -83,7 +94,8 @@ class $AssetsImagesGen {
         iconWarning,
         iconWorkspace,
         logo,
-        logoWithTitle
+        logoWithTitle,
+        tr
       ];
 }
 

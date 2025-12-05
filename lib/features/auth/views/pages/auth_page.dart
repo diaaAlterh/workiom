@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:workiom/core/di/injection_container.dart';
 import 'package:workiom/core/routes/named_routes.dart';
+import 'package:workiom/core/views/widgets/change_language_sheet.dart';
 import 'package:workiom/core/views/widgets/main_button.dart';
 import 'package:workiom/features/auth/cubits/auth_cubit.dart';
 import 'package:workiom/features/auth/cubits/auth_state.dart';
@@ -49,7 +50,9 @@ class AuthPage extends StatelessWidget {
               padding: EdgeInsets.all(32),
               child: Text(
                 'or'.tr(),
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).colorScheme.tertiary),
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  color: Theme.of(context).colorScheme.tertiary,
+                ),
               ),
             ),
           ),
@@ -60,10 +63,42 @@ class AuthPage extends StatelessWidget {
             },
           ),
           TermsAndPrivacyText(),
-          SizedBox(height: 100,)
+          SizedBox(height: 100),
         ],
       ),
-      bottomSheet: StayOrganizedWithWorkiomWidget(),
+      bottomSheet: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            color: Colors.white,
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: TextButton(
+              onPressed: () {
+                showModalBottomSheet(
+                  context: context,
+                  showDragHandle: true,
+                  isScrollControlled: true,
+                  builder: (context) => ChangeLanguageSheet(),
+                );
+              },
+              child: Row(
+                spacing: 4,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Assets.images.iconLanguge.svg(),
+                  Text(
+                    context.locale.languageCode.tr(),
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      color: Theme.of(context).colorScheme.tertiary,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          StayOrganizedWithWorkiomWidget(),
+        ],
+      ),
     );
   }
 }
