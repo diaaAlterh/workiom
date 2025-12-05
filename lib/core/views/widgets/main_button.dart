@@ -17,18 +17,21 @@ class MainButton extends StatelessWidget {
   final double? elevation;
   final OutlinedBorder? shape;
 
-  const MainButton(
-      {super.key, this.title,
-      required this.onPressed,
-      this.isLoading = false,
-      this.buttonType = ButtonType.elevated,
-      this.icon,
-      this.color,
-      this.borderColor,
-      this.padding,
-      this.shape,
-      this.backgroundColor,
-      this.elevation, this.child});
+  const MainButton({
+    super.key,
+    this.title,
+    required this.onPressed,
+    this.isLoading = false,
+    this.buttonType = ButtonType.elevated,
+    this.icon,
+    this.color,
+    this.borderColor,
+    this.padding,
+    this.shape,
+    this.backgroundColor,
+    this.elevation,
+    this.child,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -39,32 +42,27 @@ class MainButton extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-                elevation: elevation,
-                backgroundColor:
-                    backgroundColor ?? Theme.of(context).colorScheme.primary,
-                padding: padding,
-                shape: shape,
-                shadowColor: elevation==null?null:Colors.transparent,
-                foregroundColor: color??Colors.white),
+              elevation: elevation,
+              backgroundColor:
+                  backgroundColor ?? Theme.of(context).colorScheme.primary,
+              padding: padding,
+              shape: shape,
+              shadowColor: elevation == null ? null : Colors.transparent,
+              foregroundColor: color ?? Colors.white,
+            ),
             onPressed: onPressed,
             child: isLoading
-                ? const LoaderWidget(
-                    color: Colors.white,
-                  )
-                : child??Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      if (title?.isNotEmpty??false)
-                        Text(
-                          title??'',
-                        ),
-                     if(icon!=null) const SizedBox(
-                        width: 4,
+                ? const LoaderWidget(color: Colors.white)
+                : child ??
+                      Row(
+                        spacing: 8,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          if(icon!=null) icon!,
+                          if (title?.isNotEmpty ?? false) Text(title ?? ''),
+                        ],
                       ),
-                      icon ?? const SizedBox(),
-                    ],
-                  ),
           ),
         );
       case ButtonType.outlined:
@@ -78,28 +76,22 @@ class MainButton extends StatelessWidget {
               foregroundColor: color,
               backgroundColor: backgroundColor,
               side: BorderSide(
-                  color:
-                      borderColor ?? Theme.of(context).colorScheme.secondary),
+                color: borderColor ?? Theme.of(context).colorScheme.secondary,
+              ),
             ),
             onPressed: onPressed,
             child: isLoading
-                ?  LoaderWidget(
-                      color: borderColor,
-                  )
-                : child??Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      if (title?.isNotEmpty??false)
-                        Text(
-                          title??'',
-                        ),
-                      if(icon!=null)const SizedBox(
-                        width: 4,
+                ? LoaderWidget(color: borderColor)
+                : child ??
+                      Row(
+                        spacing: 8,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          if(icon!=null) icon!,
+                          if (title?.isNotEmpty ?? false) Text(title ?? ''),
+                        ],
                       ),
-                      icon ?? const SizedBox(),
-                    ],
-                  ),
           ),
         );
     }

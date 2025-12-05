@@ -13,10 +13,8 @@ import '../repository/auth_repository.dart';
 @lazySingleton
 class AuthCubit extends Cubit<AuthState> {
   final AuthRepository _authRepository;
-
   AuthCubit(this._authRepository) : super(const AuthState.initial());
 
-  GlobalKey<FormState> formKeyCreateWorkspace = GlobalKey<FormState>();
   TextEditingController controllerEmail = TextEditingController();
   TextEditingController controllerPassword = TextEditingController();
   TextEditingController controllerWorkspace = TextEditingController();

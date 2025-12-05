@@ -31,5 +31,18 @@
   "email_error": "Email is not valid",
   "workspace_error": "Workspace is not valid",
   "name_error": "Name is not valid",
-  "field_error": "This field is required"
+  "field_error": "This field is required",
+  "thank_you": "Thank you for choosing Workiom",
+  "auth_title": "Create your free account",
+  "auth_subtitle": "Let's start an amazing journey! \uD83D\uDC4B\uD83C\uDFFB",
+  "continue_with_google": "Continue with Google",
+  "or": "Or",
+  "continue_with_email": "Continue with email",
+  "by_signing": "By signing up, you agree",
+  "terms": "Terms Of Service",
+  "and": "And",
+  "privacy": "Privacy Policy",
+  "ar": "العربية",
+  "tr": "Türkçe",
+  "en": "English"
 }

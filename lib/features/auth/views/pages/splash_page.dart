@@ -37,23 +37,26 @@ class _SplashPageState extends State<SplashPage> {
       loginInformationCubit.getCurrentLoginInformation();
     } else {
       Future.delayed(const Duration(seconds: 2), () {
-        context.go(NamedRoutes.signup);
+        context.go(NamedRoutes.auth);
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<LoginInformationCubit, BaseState<LoginInformationModel>>(
+    return BlocListener<
+      LoginInformationCubit,
+      BaseState<LoginInformationModel>
+    >(
       bloc: loginInformationCubit,
       listener: (context, state) => state.maybeWhen(
         orElse: () {},
         loaded: (data) {
           data as LoginInformationModel;
           if (data.result?.user == null) {
-            context.go(NamedRoutes.signup);
+            context.go(NamedRoutes.auth);
           } else {
-            context.go(NamedRoutes.home);
+            context.go(NamedRoutes.thankYou);
           }
         },
         error: (error) {

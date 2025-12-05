@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:workiom/core/views/widgets/hide_child_when_keyboard_opened.dart';
 
 import '../../../../gen/assets.gen.dart';
@@ -25,7 +27,11 @@ class StayOrganizedWithWorkiomWidget extends StatelessWidget {
                   context,
                 ).textTheme.titleLarge?.copyWith(color: Color(0xFF555555)),
               ),
-              Assets.images.logoWithTitle.svg(),
+              CupertinoButton(
+                padding: EdgeInsets.zero,
+                  onPressed: (){
+                launchUrl(Uri.parse('https://workiom.com'));
+              },child: Assets.images.logoWithTitle.svg()),
             ],
           ),
         ),
